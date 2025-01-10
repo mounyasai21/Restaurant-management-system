@@ -1,1 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            margin-left: 20px;
+        }
+
+        .heading .left button {
+            width: 150px;
+            height: 30px;
+            font-size: 15px;
+            border-radius: 20px;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal-header, .modal-footer {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 20px 10px;
+        }
+
+        .modal-footer button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .modal-body form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-body label, .modal-body input {
+            margin-bottom: 10px;
+        }
+
+        .modal-body button {
+            margin-top: 10px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div class="logo">Fusion Feast</div>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="search">
+            <i class="fa-solid fa-search"></i>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+
+    <div class="heading">
+        <div class="left">
+            <p>Are You Hungry?</p>
+            <h1>Don't Wait</h1>
+            <p>Let's start to order food now</p>
+
+            <!-- Added onclick event to open modal -->
+            <button onclick="openModal()">Book a Table</button>
+        </div>
+
+        <div class="right" id="food"></div>
+
+        <div class="SocialMedia">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-whatsapp"></i>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="menu">
+            <div id="food1"></div>
+            <div id="food2"></div>
+        </div>
+    </div>
+
+    <!-- Modal for booking a table -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book a Table</h2>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm">
+                    <label for="bookingUsername">Username:</label>
+                    <input type="text" id="bookingUsername" required>
+                    <!-- Added onclick event to check username -->
+                    <button type="button" onclick="checkUsername()">Check</button>
+
+                    <div id="step2" style="display:none;">
+                        <label for="members">Number of Members:</label>
+                        <input type="number" id="members" name="members" required max="10">
+                        <label for="time">Time:</label>
+                        <input type="time" id="time" name="time" required>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                        <!-- Changed to type submit to trigger form submission -->
+                        <button type="submit">Submit</button>
+                    </div>
+                    <div id="confirmation" style="display:none;">
+                        <p>Your table is booked!</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for handling modal and form submission -->
+    <script>
+        // Event listener to open modal
+        function openModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+        }
+
+        // Function to check if username exists in localStorage
+        function checkUsername() {
+            const bookingUsername = document.getElementById('bookingUsername').value.trim();
+            const existingUsernames = JSON.parse(localStorage.getItem('registeredUsernames')) || [];
+            
+            if (existingUsernames.includes(bookingUsername)) {
+                document.getElementById('step2').style.display = 'block';
+            } else {
+                alert('Please register to book a table.');
+            }
+        }
+
+        // Event listener to handle form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const bookingUsername = document.getElementById('bookingUsername').value.trim();
+            const members = document.getElementById('members').value;
+            const time = document.getElementById('time').value;
+            const date = document.getElementById('date').value;
+
+            if (members && time && date) {
+                const bookingDetails = {
+                    username: bookingUsername,
+                    members: members,
+                    time: time,
+                    date: date
+                };
+
+                // Save booking details locally
+                saveBookingDetails(bookingDetails);
+
+                // Display confirmation message
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('confirmation').style.display = 'block';
+            } else {
+                alert("All fields are required to book a table.");
+            }
+        });
+
+        // Function to save booking details locally
+        function saveBookingDetails(details) {
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            bookings.push(details);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            console.log('Booking details saved locally:', details);
+        }
+
+        // Close modal if clicked outside of modal content
+        window.onclick = function(event) {
+            var modal = document.getElementById('bookingModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
 
