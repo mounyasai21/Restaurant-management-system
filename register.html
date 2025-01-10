@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fusion Feast</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('C:/Users/chiduralas/Desktop/restaurant-management/backgr.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .register-container {
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for better contrast */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 600px; /* Adjusted maximum width for the container */
+            width: 80%; /* Adjusted width to maintain responsiveness */
+            margin-bottom: 20px; /* Added margin between container and footer */
+        }
+        .register-container h1,
+        .register-container h2 {
+            margin-bottom: 20px; /* Spacing between headings and form */
+        }
+        .register-container form {
+            display: grid;
+            gap: 10px; /* Adjusted gap between grid items */
+            justify-items: center;
+            align-items: center;
+        }
+        .register-container label {
+            display: block;
+            margin-bottom: 5px; /* Adjusted margin bottom for labels */
+            color: white;
+            text-align: left;
+            width: 100%; /* Full width for labels */
+        }
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            width: calc(100% - 22px); /* Adjusted width for inputs */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            box-sizing: border-box; /* Ensures padding is included in the width calculation */
+        }
+        .register-container button {
+            background-color: #F680B0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .register-container button:hover {
+            background-color: #d46990;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 0;
+        }
+        .fusion-feast {
+            font-size: 24px;
+            font-weight: bold;
+            color: orange;
+            margin-bottom: 10px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content p {
+            font-size: 18px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="register-container">
+            <h1 class="fusion-feast">Fusion Feast</h1>
+            <h2>Create a New Account</h2>
+           
+            <form id="registerForm" class="form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fusion Feast - All rights reserved</p>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="successClose">&times;</span>
+            <p>Registration Successful!</p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="errorClose">&times;</span>
+            <p>Select another username, it is already taken.</p>
+        </div>
+    </div>
+
+    <script>
+        const registeredUsernames = JSON.parse(localStorage.getItem('registeredUsernames')) || [];
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const successModal = document.getElementById('successModal');
+            const errorModal = document.getElementById('errorModal');
+
+            if (registeredUsernames.includes(username)) {
+                errorModal.style.display = 'block';
+            } else {
+                registeredUsernames.push(username);
+                localStorage.setItem('registeredUsernames', JSON.stringify(registeredUsernames));
+                localStorage.setItem('userDetails_' + username, JSON.stringify({ email, password, address }));
+                successModal.style.display = 'block';
+            }
+        });
+
+        document.getElementById('successClose').onclick = function() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        document.getElementById('errorClose').onclick = function() {
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const successModal = document.getElementById('successModal');
+            const errorModal = document.getElementById('errorModal');
+            if (event.target == successModal) {
+                successModal.style.display = 'none';
+            }
+            if (event.target == errorModal) {
+                errorModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

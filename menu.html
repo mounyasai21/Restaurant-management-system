@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu - Restaurant Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add your styles here */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1; /* Background color for the body */
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* Center vertically and horizontally */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .menu-section {
+            padding: 20px;
+        }
+
+        .menu-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item img {
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details p {
+            margin: 5px 0;
+        }
+
+        .item-details button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .item-details button:hover {
+            background-color: #45a049;
+        }
+
+        /* Styles for login prompt */
+        #loginPrompt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .login-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 400px;
+            width: 80%;
+            text-align: center;
+        }
+
+        .login-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .login-box button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top">
+            <div class="logo">Fusion Feast</div>
+            <div class="nav">
+                <a href="#">Home</a>
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="menu.html" onclick="checkUser()">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="search">
+                <i class="fa-solid fa-search"></i>
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-section" id="menuSection" style="display: none;">
+            <h2>Our Menu</h2>
+
+            <h3>Appetizers</h3>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/Pani-Puri.jpg" alt="Pani Puri">
+                <div class="item-details">
+                    <p>Pani Puri - ₹80</p>
+                    <button onclick="showOrderDetails('Pani Puri', 80)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/samosa.jpg" alt="Samosa">
+                <div class="item-details">
+                    <p>Samosa - ₹40</p>
+                    <button onclick="showOrderDetails('Samosa', 40)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/alootikki.jpg" alt="Aloo Tikki">
+                <div class="item-details">
+                    <p>Aloo Tikki - ₹60</p>
+                    <button onclick="showOrderDetails('Aloo Tikki', 60)">Order Now</button>
+                </div>
+            </div>
+
+            <h3>Main Courses</h3>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/mix-veg-curry.jpg" alt="Mixed Veg">
+                <div class="item-details">
+                    <p>Mixed veg - ₹180</p>
+                    <button onclick="showOrderDetails('Mixed Veg', 180)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/paneer-tikka-masala.jpg" alt="Paneer Tikka Masala">
+                <div class="item-details">
+                    <p>Paneer Tikka Masala - ₹220</p>
+                    <button onclick="showOrderDetails('Paneer Tikka Masala', 220)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/dalfry.jpg" alt="Dal Fry">
+                <div class="item-details">
+                    <p>Dal Fry- ₹180</p>
+                    <button onclick="showOrderDetails('Dal Fry', 180)">Order Now</button>
+                </div>
+            </div>
+
+            <h3>Biryanis</h3>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/MushroomBiryani.jpg" alt="Mushroom Biryani">
+                <div class="item-details">
+                    <p>Mushroom Biryani - ₹200</p>
+                    <button onclick="showOrderDetails('Mushroom Biryani', 200)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/VegBiryani.jpg" alt="Veg Biryani">
+                <div class="item-details">
+                    <p>Veg Biryani - ₹180</p>
+                    <button onclick="showOrderDetails('Veg Biryani', 180)">Order Now</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/paneerbiryani.jpg" alt="Paneer Biryani">
+                <div class="item-details">
+                    <p>Paneer Biryani - ₹280</p>
+                    <button onclick="showOrderDetails('Paneer Biryani', 280)">Order Now</button>
+                </div>
+            </div>
+
+            <h3>Indian Breads</h3>
+            <div class="menu-item">
+                <img src="C:/Users/chiduralas/Desktop/restaurant-management/plainnaan.jpg" alt="Plain Naan">
+                <div class="item-details">
+                    <p>Plain Naan - ₹30</p>
+                    <button onclick="showOrderDetails('Plain Naan', 30)">Order Now</button>
+</div>
+</div>
+<div class="menu-item">
+<img src="C:/Users/chiduralas/Desktop/restaurant-management/tandooriroti.jpg" alt="Tandoori Roti">
+<div class="item-details">
+<p>Tandoori Roti - ₹50</p>
+<button onclick="showOrderDetails('Tandoori Roti', 50)">Order Now</button>
+</div>
+</div>
+<div class="menu-item">
+<img src="C:/Users/chiduralas/Desktop/restaurant-management/butternaan.jpg" alt="Butter Naan">
+<div class="item-details">
+<p>Butter Naan - ₹60</p>
+<button onclick="showOrderDetails('Butter Naan', 60)">Order Now</button>
+</div>
+</div>        <h3>Desserts</h3>
+        <div class="menu-item">
+            <img src="C:/Users/chiduralas/Desktop/restaurant-management/gulabjamun.jpg" alt="Gulab Jamun">
+            <div class="item-details">
+                <p>Gulab Jamun - ₹80</p>
+                <button onclick="showOrderDetails('Gulab Jamun', 80)">Order Now</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="C:/Users/chiduralas/Desktop/restaurant-management/rasmalai.jpg" alt="Rasamalai">
+            <div class="item-details">
+                <p>Rasamalai - ₹70</p>
+                <button onclick="showOrderDetails('Rasamalai', 70)">Order Now</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="C:/Users/chiduralas/Desktop/restaurant-management/Matkakulfi.jpg" alt="Matka Kulfi">
+            <div class="item-details">
+                <p>Matka Kulfi - ₹100</p>
+                <button onclick="showOrderDetails('Matka Kulfi', 100)">Order Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login prompt -->
+    <div id="loginPrompt">
+        <div class="login-box">
+            <h3>Please Login</h3>
+            <p>You need to login to view the menu. Enter your username below:</p>
+            <input type="text" id="username" placeholder="Enter Your Username">
+            <button onclick="checkUser()">Login</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Fusion Feast - All rights reserved</p>
+</footer>
+
+<!-- Billing details modal -->
+<div id="billingModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeBillingModal()">&times;</span>
+        <h2>Billing Details</h2>
+        <p id="selectedItemDetails"></p>
+        <p>Total Cost: <span id="totalCost"></span></p>
+        <button onclick="choosePaymentMethod()">Proceed to Payment</button>
+    </div>
+</div>
+
+<!-- Payment method selection modal -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePaymentModal()">&times;</span>
+        <h2>Choose Payment Method</h2>
+        <button onclick="confirmOrder('COD')">Cash on Delivery</button>
+        <button onclick="enterUPI()">UPI</button>
+    </div>
+</div>
+
+<!-- UPI payment modal -->
+<div id="upiPaymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeUpiPaymentModal()">&times;</span>
+        <h2>Enter UPI ID</h2>
+        <input type="text" id="upiId" placeholder="Enter UPI ID">
+        <button onclick="confirmOrder('UPI')">Submit</button>
+    </div>
+</div>
+
+<!-- Order confirmation modal -->
+<div id="orderConfirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeOrderConfirmationModal()">&times;</span>
+        <h2 style="color:white;">Order Confirmation</h2>
+        <p id="confirmationMessage"></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    var selectedItem;
+
+    function checkUser() {
+        var username = document.getElementById('username').value;
+        if (username.trim() === '') {
+            alert('Please enter your username.');
+            return;
+        }
+        // Verify username against registered users
+        var registeredUsernames = JSON.parse(localStorage.getItem('registeredUsernames')) || [];
+        if (registeredUsernames.includes(username)) {
+            // Show menu section and hide login prompt
+            document.getElementById('menuSection').style.display = 'block';
+            document.getElementById('loginPrompt').style.display = 'none';
+        } else {
+            alert('Username not found. Please register first.');
+        }
+    }
+
+    function showOrderDetails(itemName, itemPrice) {
+        // Function to show order details and proceed to payment
+        selectedItem = {
+            name: itemName,
+            price: itemPrice
+        };
+
+        document.getElementById('selectedItemDetails').innerText = `Item: ${selectedItem.name}`;
+        document.getElementById('totalCost').innerText = `₹${selectedItem.price}`;
+
+        var billingModal = document.getElementById('billingModal');
+        billingModal.style.display = 'block';
+    }
+
+    function choosePaymentMethod() {
+        // Function to display payment method selection modal
+        var billingModal = document.getElementById('billingModal');
+        billingModal.style.display = 'none';
+
+        var paymentModal = document.getElementById('paymentModal');
+        paymentModal.style.display = 'block';
+    }
+
+    function enterUPI() {
+        // Function to display UPI payment modal
+        var paymentModal = document.getElementById('paymentModal');
+        paymentModal.style.display = 'none';
+
+        var upiPaymentModal = document.getElementById('upiPaymentModal');
+        upiPaymentModal.style.display = 'block';
+    }
+
+    function confirmOrder(paymentMethod) {
+        var confirmationMessage = '';
+
+        if (paymentMethod === 'COD') {
+            confirmationMessage = 'Your order is confirmed.';
+        } else if (paymentMethod === 'UPI') {
+            var upiId = document.getElementById('upiId').value;
+            if (upiId.trim() === '') {
+                alert('Please enter your UPI ID.');
+                return;
+            }
+            confirmationMessage = `Your order is confirmed. Payment made via UPI ID: ${upiId}`;
+        }
+
+        // Save order details locally
+        saveOrderDetails();
+
+        var orderConfirmationModal = document.getElementById('orderConfirmationModal');
+        document.getElementById('confirmationMessage').innerText = confirmationMessage;
+        orderConfirmationModal.style.display = 'block';
+
+        var upiPaymentModal = document.getElementById('upiPaymentModal');
+        upiPaymentModal.style.display = 'none';
+
+        var paymentModal = document.getElementById('paymentModal');
+        paymentModal.style.display = 'none';
+    }
+
+    function saveOrderDetails() {
+        // Retrieve existing orders from local storage or initialize empty array
+        var orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+        // Add current order to the array
+        var order = {
+            username: document.getElementById('username').value,
+            itemName: selectedItem.name,
+            itemPrice: selectedItem.price,
+            timestamp: new Date().toLocaleString()
+        };
+
+        orders.push(order);
+
+        // Save updated orders back to local storage
+        localStorage.setItem('orders', JSON.stringify(orders));
+    }
+
+    function closeBillingModal() {
+        var billingModal = document.getElementById('billingModal');
+        billingModal.style.display = 'none';
+    }
+
+    function closePaymentModal() {
+        var paymentModal = document.getElementById('paymentModal');
+        paymentModal.style.display = 'none';
+    }
+
+    function closeUpiPaymentModal() {
+        var upiPaymentModal = document.getElementById('upiPaymentModal');
+        upiPaymentModal.style.display = 'none';
+    }
+
+    function closeOrderConfirmationModal() {
+        var orderConfirmationModal = document.getElementById('orderConfirmationModal');
+        orderConfirmationModal.style.display = 'none';
+    }
+
+    // Close modals when clicking outside the modal content
+    window.onclick = function(event) {
+        var modals = document.getElementsByClassName('modal');
+        for (var i = 0; i < modals.length; i++) {
+            if (event.target == modals[i]) {
+                modals[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+</body>
+</html>
