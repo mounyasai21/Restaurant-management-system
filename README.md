@@ -1,5 +1,4 @@
 
-```markdown
 #  Restaurant Management Website
 
 A full-stack restaurant management system built using HTML, CSS, JavaScript (frontend) and Node.js with Express (backend). The system supports customer login/registration, a digital menu, and food order processing with order data stored in a local file.
@@ -8,25 +7,20 @@ A full-stack restaurant management system built using HTML, CSS, JavaScript (fro
 
 ##  Project Structure
 
-```
-
 restaurant-management/
-
-├── about.html               # About the restaurant
-├── contact.html             # Contact details
-├── index.html               # Homepage with login/signup options
-├── login.html               # User login page
-├── register.html            # User registration form
-├── menu.html                # Menu page showing food items
-├── style.css                # Styling for all pages
-├── script.js                # Client-side interactivity
-├── server.js                # Express server handling backend routes
-├── test.js                  # Axios-based test script for placing orders
-├── package.json             # Project metadata and dependencies
-├── package-lock.json        # Dependency tree lock file
-└── order\_details.txt        # (Generated) Stores user order details
-
-````
+├── about.html # About the restaurant
+├── contact.html # Contact details
+├── index.html # Homepage with login/signup options
+├── login.html # User login page
+├── register.html # User registration form
+├── menu.html # Menu page showing food items
+├── style.css # Styling for all pages
+├── script.js # Client-side interactivity
+├── server.js # Express server handling backend routes
+├── test.js # Axios-based test script for placing orders
+├── package.json # Project metadata and dependencies
+├── package-lock.json # Dependency tree lock file
+└── order_details.txt # (Generated) Stores user order details
 
 
 ##  Features
@@ -46,7 +40,6 @@ restaurant-management/
 -  **File-Based Storage**
   - Orders are saved in a local `.txt` file (can later be upgraded to MySQL)
 
----
 
 ##  How to Run the Project
 
@@ -54,41 +47,30 @@ restaurant-management/
 
 Make sure you have Node.js installed. Then, in the project folder run:
 
-```bash
 npm install
-````
 
-###  Start the Server
+Start the Server
 
-```bash
 npm start
-```
-
-The server will start on: `http://localhost:3000/`
-
----
+The server will start on: http://localhost:3000/
 
 ##  Order Test with Axios
 
 The `test.js` script sends a test food order using Axios to the backend. You can modify the `data` object inside `test.js` to simulate different users and orders.
 
-```bash
 node test.js
-```
+
 
 This will POST order data to `http://localhost:3000/order` and save it to `order_details.txt`.
 
----
+
 
 ##  Sample Order Entry in `order_details.txt`
 
-```
 Mounyasai, 123@gmail.com, Pani Puri, 80
 p.navya, navs@gmail.com, Samosa, 40
 shiva, shiva@gmail.com, Dal Fry, 180
-```
 
----
 
 ##  Future Enhancements
 
