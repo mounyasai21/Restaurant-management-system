@@ -11,6 +11,7 @@ A full-stack restaurant management system built using HTML, CSS, JavaScript (fro
 ```
 
 restaurant-management/
+
 ├── about.html               # About the restaurant
 ├── contact.html             # Contact details
 ├── index.html               # Homepage with login/signup options
@@ -101,11 +102,11 @@ shiva, shiva@gmail.com, Dal Fry, 180
 
 ![Screenshot (118)](https://github.com/user-attachments/assets/bfca89e2-8bfc-4329-b4c2-da8a77c1cdfd)
 ![Screenshot (121)](https://github.com/user-attachments/assets/32d562e2-f328-4942-9d0f-3a91d0bc7202)
-![Screenshot (169)](https://github.com/user-attachments/assets/67b85d63-a408-43d5-8ba5-647538afe0dc)
+![Screenshot (155)](https://github.com/user-attachments/assets/e3656abf-2cc5-45ec-a088-8ab4b6cb9bbe)
 ![Screenshot (153)](https://github.com/user-attachments/assets/14bb615d-e3f6-4e80-acdf-e32d8842ce71)
 ![Screenshot (119)](https://github.com/user-attachments/assets/347dff4f-428c-4b7f-973d-72e0dc6e990d)
 ![Screenshot (120)](https://github.com/user-attachments/assets/0e9424ad-3914-4b37-9848-654f01df58bf)
+![Screenshot (169)](https://github.com/user-attachments/assets/67b85d63-a408-43d5-8ba5-647538afe0dc)
 ![Screenshot (148)](https://github.com/user-attachments/assets/ccd5d794-8f36-4e37-9116-d41a2937291a)
-![Screenshot (155)](https://github.com/user-attachments/assets/e3656abf-2cc5-45ec-a088-8ab4b6cb9bbe)
 ![Screenshot (160)](https://github.com/user-attachments/assets/5782e43a-4db0-464a-b76f-9fe6a6281f49)
 ![Screenshot (159)](https://github.com/user-attachments/assets/2d9d1173-4e17-439a-9321-cb118a6e070a)
