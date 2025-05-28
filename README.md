@@ -1,4 +1,3 @@
-![Screenshot (153)](https://github.com/user-attachments/assets/14bb615d-e3f6-4e80-acdf-e32d8842ce71)
 
 ```markdown
 #  Restaurant Management Website
@@ -101,11 +100,10 @@ shiva, shiva@gmail.com, Dal Fry, 180
 ## Output Screens
 
 ![Screenshot (118)](https://github.com/user-attachments/assets/bfca89e2-8bfc-4329-b4c2-da8a77c1cdfd)
-
+![Screenshot (153)](https://github.com/user-attachments/assets/14bb615d-e3f6-4e80-acdf-e32d8842ce71)
 ![Screenshot (119)](https://github.com/user-attachments/assets/347dff4f-428c-4b7f-973d-72e0dc6e990d)
-![Screenshot (120)](https://github.com/user-attachments/assets/0e9424ad-3914-4b37-9848-654f0
+![Screenshot (120)](https://github.com/user-attachments/assets/0e9424ad-3914-4b37-9848-654f01df58bf)
 ![Screenshot (153)](https://github.com/user-attachments/assets/74cb41e6-c430-42ab-a5fb-d7f2c9b0825c)
-1df58bf)
 ![Screenshot (121)](https://github.com/user-attachments/assets/32d562e2-f328-4942-9d0f-3a91d0bc7202)
 ![Screenshot (148)](https://github.com/user-attachments/assets/ccd5d794-8f36-4e37-9116-d41a2937291a)
 ![Screenshot (155)](https://github.com/user-attachments/assets/e3656abf-2cc5-45ec-a088-8ab4b6cb9bbe)
